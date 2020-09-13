@@ -12,11 +12,13 @@ import './styles.css';
 import api from '../../services/api';
 
 function Landing() {
-    const [totalConnections, setTotalConnectuins] = useState(0);
+    const [totalConnections, setTotalConnections] = useState(0);
 
     useEffect(() => {
         api.get('connections').then(response => {
-            console.log(response);
+            const {total} = response.data;
+
+            setTotalConnections(total);
         })
     }, []);
 
@@ -43,7 +45,7 @@ function Landing() {
                 </div>
 
                 <span className="total-connections">
-                        Total de 200 conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
+                        Total de {totalConnections} conexões já realizadas <img src={purpleHeartIcon} alt="Coração roxo"/>
                 </span>
             </div>
         </div>
